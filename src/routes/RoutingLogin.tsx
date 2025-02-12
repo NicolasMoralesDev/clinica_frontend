@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from "react-router";
 import Login from "../components/login/Login"
 import { Routes } from "react-router";
 
-
  interface RoutingLoginProps {
     children? : ReactNode
  }

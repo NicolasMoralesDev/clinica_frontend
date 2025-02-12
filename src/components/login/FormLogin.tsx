@@ -17,7 +17,7 @@ const FormLogin = () => {
   };
 
   return (
-    <div className="flex justify-center items-center max-h-screen bg-gray-50">
+    <div className="flex justify-center items-center flex-col h-screen bg-gray-50">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
         <Title level={ 3 } className="text-center text-gray-800 mb-6">
           Iniciar sesión
