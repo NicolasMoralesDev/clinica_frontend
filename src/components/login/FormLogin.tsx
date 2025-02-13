@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Button, Input, Form, Typography } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
 
@@ -17,7 +17,12 @@ const FormLogin = () => {
   };
 
   return (
-    <div className="flex justify-center items-center flex-col h-screen bg-gray-50">
+    <div className="flex justify-center h-full w-1/2 items-center flex-col bg-gray-50">
+      <div>
+        <Title level={ 1 } className="text-center text-gray-800 mb-6">
+          Clinica Medica
+        </Title>
+      </div>
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
         <Title level={ 3 } className="text-center text-gray-800 mb-6">
           Iniciar sesión
@@ -28,7 +33,7 @@ const FormLogin = () => {
             rules={ [{ required: true, message: "Por favor, ingresa tu nombre de usuario" }] }
           >
             <Input
-              prefix={ <UserOutlined />}
+              prefix={ <UserOutlined /> }
               placeholder="Nombre de usuario"
               size="large"
               className="rounded-lg"
