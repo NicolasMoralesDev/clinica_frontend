@@ -1,7 +1,13 @@
+import ConsultasMedicasTabla from "./ConsultasMedicasTabla"
+import FiltroConsultasMedicas from "./FiltroConsultasMedicas"
+import "./estilos/estilos.css"
 
 const ConsultasMedicas = () => {
   return (
-    <div>ConsultasMedicas</div>
+    <>
+     <FiltroConsultasMedicas/>
+     <ConsultasMedicasTabla loading={false}/>
+    </>
   )
 }
 
