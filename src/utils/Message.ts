@@ -7,7 +7,7 @@ import { message } from "antd";
  * @param key Clave para evitar popups repetidos
  * @param isLoading Condicion para mostrar o no el mensaje
  */
-export const messageLoading = (msg: string, key: string, isLoading: boolean ) => {
+export const messageLoading = (msg: string, key?: string, isLoading?: boolean ) => {
      if (isLoading) {
           message.loading({ content: msg, key: key })
      }

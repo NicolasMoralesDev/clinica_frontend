@@ -7,7 +7,7 @@ const FondoLogin = () => {
     <div className="relative h-screen  w-auto">
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/4 -translate-y-1/2 z-10">
         <Title
-          style={{ color: "white" }}
+          style={ { color: "white" } }
           className="text-4xl font-mono font-bold"
         >
           Cuidamos de vos, con la atención que mereces
@@ -15,7 +15,7 @@ const FondoLogin = () => {
       </div>
       <video
         className="object-cover relative  z-0 clip-triangle h-full"
-        src={video}
+        src={ video }
         autoPlay
         muted
         loop

@@ -11,6 +11,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 2em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.btn-bordo-custom:hover {
+  color: white !important;
+  border-color: none !important;
+  background-color: rgb(153 27 27) !important;
+}
+
 :where(.css-dev-only-do-not-override-j9bb5n).ant-form-item .ant-form-item-label >label::after {
   content: "";
 }

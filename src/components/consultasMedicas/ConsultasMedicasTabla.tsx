@@ -1,21 +1,19 @@
-import { Table } from "antd";
-import { defaultPagination } from "../../utils/DefaultPagination";
+import { Button, Space, Table } from "antd"
+import { defaultPagination } from "../../utils/DefaultPagination"
+import { IssuesCloseOutlined } from "@ant-design/icons"
+import { useState } from "react"
 
-const ConsultasMedicasTabla = ({loading}) => {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+const ConsultasMedicasTabla = ({loading, dataSource }) => {
+
+    const [consultasSeleccionadas, setConsultasSeleccionadas] = useState([])
+
+    const onCerrar = () => {
+       console.log(consultasSeleccionadas);
+    }
+
+    const onSelectConsultas = (consultaSelected) => {
+        setConsultasSeleccionadas(consultaSelected)
+    }
 
   const columns = [
     {
@@ -37,23 +35,27 @@ const ConsultasMedicasTabla = ({loading}) => {
       title: "Servicio", 
       dataIndex: "servicio",
       key: "servicio",
-    }
+    },
   ];
 
   return (
-    <div>
+    <div className="bg-slate-200 p-7">
+        <Space align="start" className="w-full flex justify-end">
+           <Button type="text" className="bg-red-800 btn-bordo-custom text-white" icon={ <IssuesCloseOutlined /> } onClick={ ()=> onCerrar() }>cerrar consultas</Button>
+        </Space>
      <Table
-        size="small"
-        rowKey={ (product) => product?.id }
+        size="large"
+        rowKey={ (consultas) => consultas?.paciente }
         dataSource={ dataSource }
         sortDirections={ ["ascend", "descend"] }
         columns={ columns }
         pagination={ defaultPagination(dataSource, 15) }
         rowSelection={ {
-       
+            selectedRowKeys: consultasSeleccionadas,
+            onChange: onSelectConsultas,
         } }
         locale={ {
-            emptyText: "No se encontraron Productos",
+            emptyText: "No se encontraron consultas medicas",
         } }
         loading={ loading }
         />
