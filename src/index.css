@@ -22,9 +22,13 @@ button {
   transition: border-color 0.25s;
 }
 
-.btn-bordo-custom:hover {
+.btn-bordo-custom {
   color: white !important;
   border-color: none !important;
+  background-color: rgb(200, 35, 35) !important;
+}
+
+.btn-bordo-custom:hover {
   background-color: rgb(153 27 27) !important;
 }
 

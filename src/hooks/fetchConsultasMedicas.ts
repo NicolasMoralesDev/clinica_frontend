@@ -11,3 +11,12 @@ export const useObtenerConsultas = () => {
       },
     })
 }
+
+export const useCerrarConsultas = (consultasSeleccionadas) => {
+  return useMutation({
+    mutationKey: ['consultaMedicas'],
+    mutationFn: async () => {
+      return await axios.post(`http://localhost:8080${ URL_BASE }/borrar`, consultasSeleccionadas)
+    },
+  })
+}

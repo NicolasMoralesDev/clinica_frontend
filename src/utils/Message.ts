@@ -5,12 +5,19 @@ import { message } from "antd";
  * 
  * @param msg Contenido a mostrar
  * @param key Clave para evitar popups repetidos
- * @param isLoading Condicion para mostrar o no el mensaje
  */
-export const messageLoading = (msg: string, key?: string, isLoading?: boolean ) => {
-     if (isLoading) {
-          message.loading({ content: msg, key: key })
-     }
+export const messageInfo = (msg: string, key?: string) => {
+     message.info({ content: msg, key: key, duration: 10 }) 
+} 
+
+/**
+ * Mensaje de carga
+ * 
+ * @param msg Contenido a mostrar
+ * @param key Clave para evitar popups repetidos
+ */
+export const messageLoading = (msg: string, key?: string ) => {
+     message.loading({ content: msg, key: key })
 }
 
 /**

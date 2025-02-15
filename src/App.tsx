@@ -3,6 +3,7 @@ import Layout, { Content, Header } from "antd/es/layout/layout"
 import { theme } from "antd"
 import NavBar from "./components/commons/NavBar"
 import "./App.css"
+import Foter from "./components/commons/Foter"
 
 interface AppProp {
   children?: ReactNode;
@@ -40,7 +41,7 @@ function App(prop: AppProp) {
           >
             {prop.children}
           </Content>
-          {/*   <Foter/> */}
+            <Foter/>
         </Layout>
       </Layout>
     </>

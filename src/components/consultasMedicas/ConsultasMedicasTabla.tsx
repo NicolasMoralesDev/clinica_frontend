@@ -1,29 +1,39 @@
-import { Button, Space, Table } from "antd"
+import { useState } from "react"
+import { Button, Space, Table, Tooltip } from "antd"
 import { defaultPagination } from "../../utils/DefaultPagination"
 import { IssuesCloseOutlined } from "@ant-design/icons"
-import { useState } from "react"
+import { ConsultaMedicas } from "../../classes/ConsultasMedicas"
+import { Paciente } from "../../classes/Paciente"
+import { Medico } from "../../classes/Medico"
 
-const ConsultasMedicasTabla = ({loading, dataSource }) => {
+const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas }) => {
 
     const [consultasSeleccionadas, setConsultasSeleccionadas] = useState([])
 
     const onCerrar = () => {
-       console.log(consultasSeleccionadas);
+      cerrarConsultas(consultasSeleccionadas)
     }
 
     const onSelectConsultas = (consultaSelected) => {
-        setConsultasSeleccionadas(consultaSelected)
+      setConsultasSeleccionadas(consultaSelected)
     }
 
   const columns = [
     {
+      title: "Número",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
       title: "Paciente",
       dataIndex: "paciente",
+      render: (paciente: Paciente) => paciente.nombre,
       key: "paciente",
     },
     {
       title: "Medico",
       dataIndex: "medico",
+      render: (medico: Medico) => medico.nombre,
       key: "medico",
     },
     {
@@ -41,11 +51,13 @@ const ConsultasMedicasTabla = ({loading, dataSource }) => {
   return (
     <div className="bg-slate-200 p-7">
         <Space align="start" className="w-full flex justify-end">
-           <Button type="text" className="bg-red-800 btn-bordo-custom text-white" icon={ <IssuesCloseOutlined /> } onClick={ ()=> onCerrar() }>cerrar consultas</Button>
+           <Tooltip title="Cerrar consultas medicas seleccionadas">
+              <Button className="btn-bordo-custom" disabled={ consultasSeleccionadas.length == 0 } icon={ <IssuesCloseOutlined /> } type="primary" onClick={ ()=> onCerrar() }>cerrar consultas</Button>
+           </Tooltip>
         </Space>
      <Table
         size="large"
-        rowKey={ (consultas) => consultas?.paciente }
+        rowKey={ (consultas: ConsultaMedicas) => consultas?.id.toString() }
         dataSource={ dataSource }
         sortDirections={ ["ascend", "descend"] }
         columns={ columns }
