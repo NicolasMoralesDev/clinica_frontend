@@ -12,7 +12,7 @@ export const useObtenerConsultas = () => {
     })
 }
 
-export const useCerrarConsultas = (consultasSeleccionadas) => {
+export const useCerrarConsultas = (consultasSeleccionadas: any) => {
   return useMutation({
     mutationKey: ['consultaMedicas'],
     mutationFn: async () => {

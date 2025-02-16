@@ -8,5 +8,6 @@ export class ConsultaMedicas {
     servicio: Number
     fechaTurno: Date
     montoTotal: Number
+    pagado: Boolean
     borrado: Boolean
 }

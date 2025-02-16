@@ -5,8 +5,17 @@ import { IssuesCloseOutlined } from "@ant-design/icons"
 import { ConsultaMedicas } from "../../classes/ConsultasMedicas"
 import { Paciente } from "../../classes/Paciente"
 import { Medico } from "../../classes/Medico"
+import dayjs, { Dayjs } from "dayjs"
+import { FECHA_FORMATO_BARRAS } from "../../constants/fechasFormatos"
 
-const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas }) => {
+interface ConsultasMedicasTablaProps {
+   loading: boolean
+   dataSource: ConsultaMedicas[]
+   cerrarConsultas: Function
+   onDetalleModal: Function
+}
+
+const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleModal }: ConsultasMedicasTablaProps) => {
 
     const [consultasSeleccionadas, setConsultasSeleccionadas] = useState([])
 
@@ -14,7 +23,7 @@ const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas }) => {
       cerrarConsultas(consultasSeleccionadas)
     }
 
-    const onSelectConsultas = (consultaSelected) => {
+    const onSelectConsultas = (consultaSelected: any) => {
       setConsultasSeleccionadas(consultaSelected)
     }
 
@@ -38,14 +47,21 @@ const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas }) => {
     },
     {
       title: "Fecha Programada", 
-      dataIndex: "fecha",
-      key: "fecha",
+      dataIndex: "fechaTurno",
+      key: "fechaTurno",
+      render: (fechaTurno: Dayjs) => dayjs(fechaTurno).format(FECHA_FORMATO_BARRAS),
     },
     {
       title: "Servicio", 
       dataIndex: "servicio",
       key: "servicio",
     },
+    {
+      title: "Pagado", 
+      dataIndex: "pagado",
+      key: "pagado",
+      render: (pagado: Boolean) => pagado ? "SI" : "NO",
+    }
   ];
 
   return (
@@ -61,6 +77,13 @@ const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas }) => {
         dataSource={ dataSource }
         sortDirections={ ["ascend", "descend"] }
         columns={ columns }
+        onRow={ (consulta) => {
+          return {
+            onClick: () => {
+              onDetalleModal(consulta)
+            }
+         }
+        } }
         pagination={ defaultPagination(dataSource, 15) }
         rowSelection={ {
             selectedRowKeys: consultasSeleccionadas,

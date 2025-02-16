@@ -1,13 +1,21 @@
-import useForm from "antd/lib/form/hooks/useForm"
-import { Button, Card, Col, DatePicker, Form, Row } from "antd"
+import { Button, Card, Col, DatePicker, Form, Row, Select } from "antd"
 import dayjs from "dayjs"
 import { FECHA_FORMATO_BARRAS } from "../../constants/fechasFormatos"
+import { Paciente } from "../../classes/Paciente"
+import { Medico } from "../../classes/Medico"
 
-const FiltroConsultasMedicas = () => {
-  const [form] = useForm()
+interface FiltroConsultasMedicasProps {
+  pacientes: Paciente[]
+  medicos: Medico[]
+  filtrarConsultas: Function
+  form: any
+}
+
+const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: FiltroConsultasMedicasProps) => {
 
   const handleFinish = (data: unknown) => {
     console.log(data);
+    filtrarConsultas(data)
   }
 
   return (
@@ -37,28 +45,28 @@ const FiltroConsultasMedicas = () => {
               </Col>
               <Col span={ 5 }>
                 <Form.Item label="Medico" name="medico">
-            {/*       <Select
+                  <Select
                     allowClear
                     placeholder="seleccione"
-                    options={ categorias?.map((categoria: Categoria) => ( {
-                      key: categoria.titulo,
-                      label: categoria.titulo.toUpperCase(),
-                      value: categoria.titulo,
-                    })) }
-                  /> */}
+                    options={ medicos?.map((medico: Medico) => ( {
+                      key: medico.id,
+                      label: medico.nombre.toUpperCase(),
+                      value: medico.id,
+                    } )) }
+                  /> 
                 </Form.Item>
               </Col>
               <Col span={ 5 }>
                 <Form.Item label="Paciente" name="paciente">
-            {/*       <Select
-                    allowClear
-                    placeholder="seleccione"
-                    options={ categorias?.map((categoria: Categoria) => ( {
-                      key: categoria.titulo,
-                      label: categoria.titulo.toUpperCase(),
-                      value: categoria.titulo,
-                    })) }
-                  /> */}
+                   <Select
+                     allowClear
+                     placeholder="seleccione"
+                     options={ pacientes?.map((paciente: Paciente) => ( {
+                       key: paciente.nombre,
+                       label: paciente.nombre.toUpperCase(),
+                       value: paciente.id,
+                     } )) }
+                  /> 
                 </Form.Item>
               </Col>
               <Col span={ 5 }>
@@ -79,6 +87,7 @@ const FiltroConsultasMedicas = () => {
               <Form.Item>
                 <Button
                   htmlType="submit"
+                  type="primary"
                   className="btn-cyan-custom bg-cyan-900 text-white"
                 >
                   Filtrar
