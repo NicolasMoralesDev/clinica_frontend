@@ -3,6 +3,7 @@ import dayjs from "dayjs"
 import { FECHA_FORMATO_BARRAS } from "../../constants/fechasFormatos"
 import { Paciente } from "../../classes/Paciente"
 import { Medico } from "../../classes/Medico"
+import { ConsultaMedicaFiltro } from "../../classes/ConsultaMedicaFiltro"
 
 interface FiltroConsultasMedicasProps {
   pacientes: Paciente[]
@@ -13,7 +14,7 @@ interface FiltroConsultasMedicasProps {
 
 const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: FiltroConsultasMedicasProps) => {
 
-  const handleFinish = (data: unknown) => {
+  const handleFinish = (data: ConsultaMedicaFiltro) => {
     console.log(data);
     filtrarConsultas(data)
   }
@@ -40,7 +41,7 @@ const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: 
                     maxDate={ dayjs(FECHA_FORMATO_BARRAS) }
                     format={ {
                       format: FECHA_FORMATO_BARRAS
-                      } }/>
+                    } }/>
                 </Form.Item>
               </Col>
               <Col span={ 5 }>
@@ -66,6 +67,18 @@ const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: 
                        label: paciente.nombre.toUpperCase(),
                        value: paciente.id,
                      } )) }
+                  /> 
+                </Form.Item>
+              </Col>
+              <Col span={ 5 }>
+                <Form.Item label="Abierto" name="abierta">
+                   <Select
+                     allowClear
+                     placeholder="seleccione"
+                      options={ [
+                        { key: "true", label: "SI", value: true },
+                        { key: "false", label: "NO", value: false },
+                      ] }
                   /> 
                 </Form.Item>
               </Col>

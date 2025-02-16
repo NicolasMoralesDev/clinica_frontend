@@ -8,34 +8,38 @@ import DetalleConsultasMedicasModal from "./DetalleConsultasMedicasModal"
 import useForm from "antd/lib/form/hooks/useForm"
 import { useObtenerPacientes } from "../../hooks/fetchPacientes"
 import { useObtenerMedicos } from "../../hooks/fetchMedicos"
+import { ConsultaMedicaFiltro } from "../../classes/ConsultaMedicaFiltro"
 import "./estilos/estilos.css"
 
 const ConsultasMedicas = () => {
 
     const [form] = useForm()
     const [consultasSeleccionadas, setConsultasSeleccionadas] = useState([])
+    const [consultasMedicasFiltro, setConsultasMedicasFiltro] = useState<ConsultaMedicaFiltro>(
+      {
+        medico: null,
+        paciente: null,
+        abierto: true
+      }
+    )
     const [detalleModal, setDetalleModal] = useState(false)
     const [consultaModal, setConsultaModal] = useState<ConsultaMedicas>()
 
-    const { mutate: obtenerConsultas, isLoading: obteniendoConsultas, data: consultasObtenidas, error: errorAlObtenerConsultas } = useObtenerConsultas()
+    const { mutate: obtenerConsultas, isLoading: obteniendoConsultas, data: consultasObtenidas, error: errorAlObtenerConsultas } = useObtenerConsultas(consultasMedicasFiltro)
     const { mutate: cerrarConsultas, isLoading: cerrandoConsultas, data: consultasCerradas, error: errorAlCerrarConsultas } = useCerrarConsultas(consultasSeleccionadas)
 
     const { mutate: obtenerPacientes, data: pacientesObtenidos } = useObtenerPacientes()
 
     const { mutate: obtenerMedicos, data: medicosObtenidos } = useObtenerMedicos()
 
-    const onCerrarConsultas = (consultasSeleccionadas: any) => {  
-      setConsultasSeleccionadas(consultasSeleccionadas)
-    }
+    const onCerrarConsultas = (consultasSeleccionadas: any) => {  setConsultasSeleccionadas(consultasSeleccionadas) }
 
     const onDetalleModal = (consultaModal: ConsultaMedicas) => {
       setConsultaModal(consultaModal)
       setDetalleModal(!detalleModal)
     }
 
-    const filtrarConsultas = (data: any) => {
-      console.log(data)
-    }
+    const filtrarConsultas = (data: ConsultaMedicaFiltro) => { setConsultasMedicasFiltro(data) }
 
     useEffect(() => { obtenerConsultas() }, [consultasCerradas])
     useEffect(() => { obtenerPacientes(), obtenerMedicos() }, [])

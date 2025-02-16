@@ -1,13 +1,14 @@
 import { useMutation } from 'react-query'
 import axios from "axios"
+import { ConsultaMedicaFiltro } from '../classes/ConsultaMedicaFiltro'
 
 const URL_BASE = "/api/consultasMedicas"
 
-export const useObtenerConsultas = () => {
+export const useObtenerConsultas = (consultaMedica: ConsultaMedicaFiltro) => {
     return useMutation({
       mutationKey: ['consultasMedicas'],
       mutationFn: async () => {
-        return await axios.get(`http://localhost:8080${ URL_BASE }/obtenerTodas`)
+        return await axios.post(`http://localhost:8080${ URL_BASE }/obtenerTodas`, consultaMedica)
       },
     })
 }
