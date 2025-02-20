@@ -6,7 +6,7 @@ import { ConsultaMedicas } from "../../classes/ConsultasMedicas"
 interface DetalleConsultasMedicasModalProps {
   detalleModal: boolean
   consultaModal?: ConsultaMedicas
-  setDetalleModal: Function
+  setDetalleModal: (estado: boolean) => void
   form: any
 }
 
@@ -22,7 +22,7 @@ const DetalleConsultasMedicasModal = ({ detalleModal, consultaModal, setDetalleM
         pacienteObraSocial:  consultaModal?.paciente?.obraSocial ? "SI" : 'NO',
         medicoNombre: detalleModal ? consultaModal?.medico?.nombre : '',
 /*         fecha: detalleModal ? consultaModal?.fecha : '',
- */        servicio: detalleModal ? consultaModal?.servicio : '',
+ */     servicio: detalleModal ? consultaModal?.servicio : '',
         fechaTurno: detalleModal ? consultaModal?.fechaTurno : '',
         montoTotal: detalleModal ? consultaModal?.montoTotal : '',
         pagado: detalleModal ? consultaModal?.pagado : ''

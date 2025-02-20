@@ -7,15 +7,17 @@ import { Paciente } from "../../classes/Paciente"
 import { Medico } from "../../classes/Medico"
 import dayjs, { Dayjs } from "dayjs"
 import { FECHA_FORMATO_BARRAS } from "../../constants/fechasFormatos"
+import MenuParametrosGenerales from "../parametrosGenerales/MenuParametrosGenerales"
 
 interface ConsultasMedicasTablaProps {
-   loading: boolean
-   dataSource: ConsultaMedicas[]
-   cerrarConsultas: Function
-   onDetalleModal: Function
+  loading: boolean
+  dataSource: ConsultaMedicas[]
+  cerrarConsultas: (cerrado: any) => void
+  onDetalleModal: (detalle: any) => void
+  onMenuParametros: (menu: any) => void
 }
 
-const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleModal }: ConsultasMedicasTablaProps) => {
+const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleModal, onMenuParametros }: ConsultasMedicasTablaProps) => {
 
     const [consultasSeleccionadas, setConsultasSeleccionadas] = useState([])
 
@@ -36,13 +38,13 @@ const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleM
     {
       title: "Paciente",
       dataIndex: "paciente",
-      render: (paciente: Paciente) => paciente.nombre,
+      render: (paciente: Paciente) => paciente?.nombre,
       key: "paciente",
     },
     {
       title: "Medico",
       dataIndex: "medico",
-      render: (medico: Medico) => medico.nombre,
+      render: (medico: Medico) => medico?.nombre,
       key: "medico",
     },
     {
@@ -67,6 +69,9 @@ const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleM
   return (
     <div className="bg-slate-200 p-7">
         <Space align="start" className="w-full flex justify-end">
+           <MenuParametrosGenerales
+             onMenuParametros={ onMenuParametros }
+           />
            <Tooltip title="Cerrar consultas medicas seleccionadas">
               <Button className="btn-bordo-custom" disabled={ consultasSeleccionadas.length == 0 } icon={ <IssuesCloseOutlined /> } type="primary" onClick={ ()=> onCerrar() }>cerrar consultas</Button>
            </Tooltip>

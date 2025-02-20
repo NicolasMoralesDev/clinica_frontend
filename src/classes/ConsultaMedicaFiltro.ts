@@ -1,6 +1,6 @@
-
 export class ConsultaMedicaFiltro {
-    medico: Number
-    paciente: Number
-    abierto: Boolean
+    medico?: Number
+    paciente?: Number
+    abierto?: Boolean
+    pagado: Boolean
 }

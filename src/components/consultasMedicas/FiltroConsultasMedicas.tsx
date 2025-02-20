@@ -8,16 +8,13 @@ import { ConsultaMedicaFiltro } from "../../classes/ConsultaMedicaFiltro"
 interface FiltroConsultasMedicasProps {
   pacientes: Paciente[]
   medicos: Medico[]
-  filtrarConsultas: Function
+  filtrarConsultas: (filtro: ConsultaMedicaFiltro) => void
   form: any
 }
 
 const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: FiltroConsultasMedicasProps) => {
 
-  const handleFinish = (data: ConsultaMedicaFiltro) => {
-    console.log(data);
-    filtrarConsultas(data)
-  }
+  const handleFinish = (data: ConsultaMedicaFiltro) => {  filtrarConsultas(data) }
 
   return (
     <>
@@ -76,8 +73,20 @@ const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: 
                      allowClear
                      placeholder="seleccione"
                       options={ [
-                        { key: "true", label: "SI", value: true },
-                        { key: "false", label: "NO", value: false },
+                        { key: "false", label: "SI", value: false },
+                        { key: "true", label: "NO", value: true },
+                      ] }
+                  /> 
+                </Form.Item>
+              </Col>
+              <Col span={ 5 }>
+                <Form.Item label="Pagado" name="pagado">
+                   <Select
+                     allowClear
+                     placeholder="seleccione"
+                      options={ [
+                        { key: "false", label: "SI", value: false },
+                        { key: "true", label: "NO", value: true },
                       ] }
                   /> 
                 </Form.Item>
@@ -101,7 +110,7 @@ const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: 
                 <Button
                   htmlType="submit"
                   type="primary"
-                  className="btn-cyan-custom bg-cyan-900 text-white"
+                  className="btn-cyan-custom text-white"
                 >
                   Filtrar
                 </Button>
