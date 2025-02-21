@@ -17,7 +17,7 @@ const MenuParametrosGenerales = ({ onMenuParametros } : MenuParametrosGeneralesP
       key: '2',
       children: [
         {
-          label: 'Categorias',
+          label: 'Categorías',
           key: 'categorias',
         },
         {
@@ -25,7 +25,7 @@ const MenuParametrosGenerales = ({ onMenuParametros } : MenuParametrosGeneralesP
           key: 'servInv',
         },
         {
-          label: 'Servicios medico',
+          label: 'Servicios medíco',
           key: 'servMedico',
         },
         {

@@ -2,19 +2,19 @@ import { useState } from "react"
 import { Button, Input, Form, Typography } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
 
-const { Title } = Typography;
+const { Title } = Typography
 
 const FormLogin = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const onFinish = (values: unknown) => {
-    setLoading(true);
+    setLoading(true)
     // Simula una llamada a la API para el login
     setTimeout(() => {
-      setLoading(false);
-      console.log("Usuario autenticado:", values);
-    }, 2000);
-  };
+      setLoading(false)
+      console.log("Usuario autenticado:", values)
+    }, 2000)
+  }
 
   return (
     <div className="flex justify-center h-full w-1/2 items-center flex-col bg-gray-50">

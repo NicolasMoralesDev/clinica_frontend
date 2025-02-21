@@ -42,7 +42,7 @@ const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: 
                 </Form.Item>
               </Col>
               <Col span={ 5 }>
-                <Form.Item label="Medico" name="medico">
+                <Form.Item label="Medíco" name="medico">
                   <Select
                     allowClear
                     placeholder="seleccione"
@@ -68,19 +68,7 @@ const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: 
                 </Form.Item>
               </Col>
               <Col span={ 5 }>
-                <Form.Item label="Abierto" name="abierta">
-                   <Select
-                     allowClear
-                     placeholder="seleccione"
-                      options={ [
-                        { key: "false", label: "SI", value: false },
-                        { key: "true", label: "NO", value: true },
-                      ] }
-                  /> 
-                </Form.Item>
-              </Col>
-              <Col span={ 5 }>
-                <Form.Item label="Pagado" name="pagado">
+                <Form.Item label="Abierta" name="abierta">
                    <Select
                      allowClear
                      placeholder="seleccione"

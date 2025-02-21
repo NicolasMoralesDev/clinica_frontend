@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Button, Space, Table, Tooltip } from "antd"
+import { Button, Space, Table, Tag, Tooltip } from "antd"
 import { defaultPagination } from "../../utils/DefaultPagination"
 import { IssuesCloseOutlined } from "@ant-design/icons"
 import { ConsultaMedicas } from "../../classes/ConsultasMedicas"
@@ -62,7 +62,8 @@ const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleM
       title: "Pagado", 
       dataIndex: "pagado",
       key: "pagado",
-      render: (pagado: Boolean) => pagado ? "SI" : "NO",
+      sorter: (a: any, b: any ) => a.pagado - b.pagado, 
+      render: (pagado: boolean) => pagado ? <Tag color="green">SI</Tag> : <Tag color="error">NO</Tag>,
     }
   ];
 

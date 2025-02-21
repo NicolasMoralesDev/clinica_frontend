@@ -1,5 +1,5 @@
-import FondoLogin from "./FondoLogin";
-import FormLogin from "./FormLogin";
+import FondoLogin from "./FondoLogin"
+import FormLogin from "./FormLogin"
 
 const Login = () => {
   return (

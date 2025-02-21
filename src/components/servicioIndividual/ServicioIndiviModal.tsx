@@ -37,18 +37,25 @@ const ServicioIndiviModal = ({ visible, close }: ServicioIndiviProp) => {
         
   return (
     <ConfirmationModal
-       open={ visible }
-       onCancel={ ()=> close(SERVINV) }
-       title="Servicios individuales"
+      width={ 1000 }
+      open={ visible }
+      onCancel={ ()=> close(SERVINV) }
+      title="Servicios individuales"
     >
-      <ServicioIndividualTabla 
-        loading={ registrandoServIndivi }
-        dataSource={ serviciosObtenidos?.data }
-      />
-     <ServicioIndiviRegistrar
-       onRegistrar={ onRegistrar }
-       categorias={ categoriaObtenida?.data }
-     />
+    <div className="flex">
+       <div className="w-1/2">
+       <ServicioIndividualTabla 
+         loading={ registrandoServIndivi }
+         dataSource={ serviciosObtenidos?.data }
+       />
+       </div>
+       <div className="w-1/2">
+       <ServicioIndiviRegistrar
+         onRegistrar={ onRegistrar }
+         categorias={ categoriaObtenida?.data }
+       />
+      </div>
+    </div>
    </ConfirmationModal>
   )
 }

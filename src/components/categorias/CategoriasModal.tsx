@@ -35,7 +35,7 @@ const CategoriasModal = ({ visible, close }: CategoriasModalProp) => {
       width={ 1000 }
       open={ visible }
       onCancel={ ()=> close(CATEGORIA) }
-      title="Categorias"
+      title="Categorías"
     >
       <div className="flex">
           <div className="w-1/2">

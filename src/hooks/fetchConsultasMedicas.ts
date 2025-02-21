@@ -6,7 +6,7 @@ const URL_BASE = "/api/consultasMedicas"
 
 export const useObtenerConsultas = (consultaMedica: ConsultaMedicaFiltro) => {
     return useMutation({
-      mutationKey: ['consultasMedicas'],
+      mutationKey: ['consultas-medicas'],
       mutationFn: async () => {
         return await axios.post(`http://localhost:8080${ URL_BASE }/obtenerTodas`, consultaMedica)
       },
@@ -15,7 +15,7 @@ export const useObtenerConsultas = (consultaMedica: ConsultaMedicaFiltro) => {
 
 export const useCerrarConsultas = (consultasSeleccionadas: any) => {
   return useMutation({
-    mutationKey: ['consultaMedicas'],
+    mutationKey: ['consulta-medicas'],
     mutationFn: async () => {
       return await axios.post(`http://localhost:8080${ URL_BASE }/borrar`, consultasSeleccionadas)
     },

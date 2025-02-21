@@ -8,7 +8,7 @@ import Routing from "./Routes"
     children? : ReactNode
  }
     
-const RoutingLogin = (prop: RoutingLoginProps) => {
+const RoutingLogin = (_prop: RoutingLoginProps) => {
   return (
     <BrowserRouter>
       <Routes>

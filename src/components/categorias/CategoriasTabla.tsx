@@ -22,7 +22,7 @@ const CategoriasTabla = ({ loading, dataSource }: CategoriasTablaProp) => {
       dataIndex: "nombre",
       key: "nombre",
     },
-  ];
+  ]
 
   return (
      <Table
@@ -37,7 +37,7 @@ const CategoriasTabla = ({ loading, dataSource }: CategoriasTablaProp) => {
             onChange: onSelectConsultas,
         } }
         locale={ {
-            emptyText: "No se encontraron categorias",
+            emptyText: "No se encontraron categorías",
         } }
         loading={ loading }
         />

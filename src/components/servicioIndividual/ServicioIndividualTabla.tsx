@@ -16,11 +16,31 @@ const ServicioIndividualTabla = ({ loading, dataSource }: ServicioIndividualTabl
   }
 
   const columns = [
+    {
+      title: "Nombre",
+      dataIndex: "nombre",
+      key: "nombre",
+    },
+    {
+      title: "Código",
+      dataIndex: "codigo",
+      key: "codigo",
+    },
    {
-     title: "Categoria",
+     title: "Categoría",
      dataIndex: "categoria",
      key: "categoria",
    },
+   {
+    title: "Descripción",
+    dataIndex: "descripcion",
+    key: "descripcion",
+  },
+   {
+    title: "Precio",
+    dataIndex: "precio",
+    key: "precio",
+  },
   ];
 
 return (
@@ -40,7 +60,7 @@ return (
       } }
       loading={ loading }
       />
-);
+  );
 }
 
 export default ServicioIndividualTabla

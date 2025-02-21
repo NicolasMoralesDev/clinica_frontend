@@ -34,7 +34,7 @@ const ConsultasMedicas = () => {
       {
         medico: undefined,
         paciente: undefined,
-        abierto: true
+        abierto: undefined      
       }
     )
     const [detalleModal, setDetalleModal] = useState(false)
