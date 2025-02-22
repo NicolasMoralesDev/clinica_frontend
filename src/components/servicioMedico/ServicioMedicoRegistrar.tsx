@@ -1,8 +1,9 @@
 import { Button, Card, Col, Form, Input } from "antd"
 import useForm from "antd/es/form/hooks/useForm"
+import { ServicioMedico } from "../../classes/ServicioMedico"
 
 interface ServicioMedicoRegistrarProp {
-  onRegistrar: (categoria: Categoria) => void
+  onRegistrar: (servicio: ServicioMedico) => void
 } 
 
 const ServicioMedicoRegistrar = ({ onRegistrar }: ServicioMedicoRegistrarProp) => {

@@ -46,7 +46,7 @@ const ServicioIndividualTabla = ({ loading, dataSource }: ServicioIndividualTabl
 return (
    <Table
       size="small"
-      rowKey={ (servicio: ServicioIndividual) => servicio?.idServicioIndividual.toString() }
+      rowKey={ (servicio: ServicioIndividual) => servicio?.idServicio.toString() }
       dataSource={ dataSource }
       sortDirections={ ["ascend", "descend"] }
       columns={ columns }

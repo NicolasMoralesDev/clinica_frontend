@@ -19,7 +19,7 @@ const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: 
   return (
     <>
       <Card className="bg-slate-200">
-        <Card title="Filtro de consultas Medicas">
+        <Card title="Filtro de consultas Médicas">
           <Form
             form={ form }
             name="basic"
@@ -32,7 +32,7 @@ const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: 
           >
             <Row gutter={ [22, 22] }>
               <Col span={ 5 }>
-                <Form.Item label="Fecha" name="fecha" className="w-full">
+                <Form.Item label="Fecha" name="fecha">
                   <DatePicker 
                     allowClear 
                     maxDate={ dayjs(FECHA_FORMATO_BARRAS) }

@@ -16,7 +16,7 @@ const CategoriasRegistrar = ({ onRegistrar } : CategoriasRegistrarProp) => {
     useEffect(() => {
         form.setFieldsValue({
           nombre: "",
-          categoriaCodigo: ""
+          codigoCategoria: ""
         })
     }, [form])   
     
@@ -39,7 +39,7 @@ const CategoriasRegistrar = ({ onRegistrar } : CategoriasRegistrarProp) => {
           </Form.Item>
           <Form.Item
             label="Codigo"
-            name="categoriaCodigo"
+            name="codigoCategoria"
             rules={ [ { required: true, message: 'Por favor, ingrese el codigo!' } ] }
           >
             <Input/>

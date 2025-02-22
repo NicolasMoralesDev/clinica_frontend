@@ -1,7 +1,6 @@
 
 import axios from "axios"
 import { useMutation } from "react-query"
-import { Categoria } from "../classes/Categoria"
 
 const URL_BASE = "/categoria"
 
@@ -14,7 +13,7 @@ export const useObtenerCategorias = () => {
     })
 }
 
-export const useRegistrarCategoria = (categoria: Categoria) => {
+export const useRegistrarCategoria = (categoria: any) => {
     return useMutation({
       mutationKey: ['categorias'],
       mutationFn: async () => {

@@ -2,9 +2,10 @@ import { Button, Card, Col, Form, Input, Select } from "antd"
 import useForm from "antd/es/form/hooks/useForm"
 import { Categoria } from "../../classes/Categoria"
 import TextArea from "antd/es/input/TextArea"
+import { ServicioIndividual } from "../../classes/ServicioIndividual"
 
 interface ServicioIndiviRegistrarProp {
-  onRegistrar: (categoria: Categoria) => void
+  onRegistrar: (servicio: ServicioIndividual) => void
   categorias: any
 } 
 
@@ -27,7 +28,7 @@ const ServicioIndiviRegistrar = ({ onRegistrar, categorias }: ServicioIndiviRegi
                    <Select
                      allowClear
                      placeholder="seleccione"
-                     options={ categorias?.data?.map((categoria: Categoria) => ( {
+                     options={ categorias?.map((categoria: Categoria) => ( {
                        key: categoria?.nombre,
                        label: categoria?.nombre.toUpperCase(),
                        value: categoria?.idCategoria,
@@ -47,7 +48,7 @@ const ServicioIndiviRegistrar = ({ onRegistrar, categorias }: ServicioIndiviRegi
                   <TextArea 
                     showCount 
                     maxLength={ 300 }
-                    autoSize={ {minRows: 5, maxRows: 10 } }  
+                    autoSize={ { minRows: 5, maxRows: 10 } }  
                   />
                 </Form.Item>
               </Col>

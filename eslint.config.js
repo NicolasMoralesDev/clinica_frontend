@@ -26,7 +26,14 @@ export default tseslint.config(
        "@typescript-eslint/no-wrapper-object-types": "off",
        "@typescript-eslint/no-explicit-any": "off",
        "@typescript-eslint/no-unsafe-function-types": "off",
-       "@typescript-eslint/no-unused-expressions": 'off'
+       "@typescript-eslint/no-unused-expressions": 'off',
+       "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "varsIgnorePattern": "^_",
+          "argsIgnorePattern": "^_"
+        }
+      ]
     },
   },
 )

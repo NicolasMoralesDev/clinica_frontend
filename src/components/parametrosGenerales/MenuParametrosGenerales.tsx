@@ -34,7 +34,7 @@ const MenuParametrosGenerales = ({ onMenuParametros } : MenuParametrosGeneralesP
         },
       ],
     },
-  ];
+  ]
 
   const onClick = (e: any) => { onMenuParametros(e.key) }
 
@@ -51,7 +51,7 @@ const MenuParametrosGenerales = ({ onMenuParametros } : MenuParametrosGeneralesP
           }
           trigger={ ['click'] }
         >
-          <Button>
+          <Button type="primary" className="btn-cyan-custom text-white">
             Parametros generales <DownOutlined />
           </Button>
         </Dropdown>

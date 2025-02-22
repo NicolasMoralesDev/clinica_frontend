@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useMutation } from "react-query"
-import { ServicioMedico } from "../classes/ServicioMedico"
 
 const URL_BASE = "/servicio-medico"
 
@@ -13,7 +12,7 @@ export const useObtenerServMedico = () => {
     })
 }
 
-export const useRegistrarServMedico = (servMedico: ServicioMedico) => {
+export const useRegistrarServMedico = (servMedico: any) => {
     return useMutation({
       mutationKey: ['servicio-medico'],
       mutationFn: async () => {

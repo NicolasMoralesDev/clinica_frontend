@@ -15,19 +15,19 @@ interface CategoriasModalProp {
 const CategoriasModal = ({ visible, close }: CategoriasModalProp) => {
 
     const [categoria, setCategoria] = useState<Categoria>()
-    const { mutate: registrarCategoria, isLoading: registrandoCategoria, data: categoriaRegistrada, error: errorAlRegistrarEspecialidad } = useRegistrarCategoria(categoria)
+    const { mutate: registrarCategoria, isLoading: registrandoCategoria, data: categoriaRegistrada, error: _errorAlRegistrarEspecialidad } = useRegistrarCategoria(categoria)
     const { mutate: obtenerCategorias, isLoading: obteniendoCategoria, data: categoriaObtenida } = useObtenerCategorias()
     
-    useEffect(() => { if(categoriaRegistrada)  { messageSuccess(categoriaRegistrada?.data?.msg, "categoria") } }, [categoriaRegistrada])
+    useEffect(() => { if(categoriaRegistrada)  { messageSuccess("Categoría registrada correctamente!", "categoria") } }, [categoriaRegistrada])
     useEffect(() => { if(registrandoCategoria) { messageLoading("Registrando...", "categoria") } }, [registrandoCategoria])
    
     useEffect(() => { obtenerCategorias() }, [categoriaRegistrada])
+
+    useEffect(() => { categoria && registrarCategoria() }, [categoria])
+
     
-    const onRegistrar = (data: Categoria) => {
+    const onRegistrar = (data: any) => {
         setCategoria(data)
-      if (categoria != null) {
-        registrarCategoria()
-      }
     }
 
   return (

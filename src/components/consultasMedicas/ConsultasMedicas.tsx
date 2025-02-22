@@ -4,7 +4,6 @@ import ConsultasMedicasTabla from "./ConsultasMedicasTabla"
 import FiltroConsultasMedicas from "./FiltroConsultasMedicas"
 import { messageError, messageInfo, messageLoading, messageSuccess } from "../../utils/Message"
 import { ConsultaMedicas } from "../../classes/ConsultasMedicas"
-import DetalleConsultasMedicasModal from "./DetalleConsultasMedicasModal"
 import useForm from "antd/lib/form/hooks/useForm"
 import { useObtenerPacientes } from "../../hooks/fetchPacientes"
 import { useObtenerMedicos } from "../../hooks/fetchMedicos"
@@ -14,12 +13,15 @@ import CategoriasModal from "../categorias/CategoriasModal"
 import EspecialidadesModal from "../especialidades/EspecialidadesModal"
 import PaqueteMedicoModal from "../paquetes/PaqueteMedicoModal"
 import ServicioIndiviModal from "../servicioIndividual/ServicioIndiviModal"
+import ConsultasMedicasModal from "./ConsultasMedicasModal"
 import "./estilos/estilos.css"
 
 const ConsultasMedicas = () => {
 
     const [form] = useForm()
     const [visibleModales, setVisibleModales] = useState<Map<String, boolean>>(menuKey)
+
+    const [visibleRegistrar, setVisibleRegistrar] = useState(false)
 
     const onMenuParametros = (key: String) => {
       setVisibleModales(prevMap => {
@@ -54,63 +56,73 @@ const ConsultasMedicas = () => {
       setDetalleModal(!detalleModal)
     }
 
+    const onRegister = () => { setVisibleRegistrar(!visibleRegistrar), console.log(visibleRegistrar);
+     }
+
     const filtrarConsultas = (data: ConsultaMedicaFiltro) => { setConsultasMedicasFiltro(data) }
 
     useEffect(() => { obtenerConsultas() }, [consultasCerradas, consultasMedicasFiltro])
     useEffect(() => { obtenerPacientes()
                       obtenerMedicos() }, [])
 
-    /* CONSULTAS MEDICAS */
+    /* CONSULTAS MÉDICAS */
 
     useEffect(() => { if(consultasSeleccionadas.length > 0) { cerrarConsultas()  }}, [consultasSeleccionadas])
-    useEffect(() => { if(cerrandoConsultas) {  messageLoading("Cerrando consultas medicas...", "consultas") } }, [cerrandoConsultas])
-    useEffect(() => { if(errorAlCerrarConsultas) {  messageError(errorAlCerrarConsultas?.message, "consultas") } }, [errorAlCerrarConsultas])
+    useEffect(() => { if(cerrandoConsultas) {  messageLoading("Cerrando consultas médicas...", "consultas") } }, [cerrandoConsultas])
+    useEffect(() => { if(errorAlCerrarConsultas) {  messageError("Se a producido un error al obtener cerrar médicas", "consultas") } }, [errorAlCerrarConsultas])
     useEffect(() => { if(consultasCerradas) {  messageSuccess("Consultas cerradas!", "consultas") } }, [consultasCerradas])
-    useEffect(() => { if(obteniendoConsultas) {  messageLoading("Obteniendo consultas medicas...", "consultas") } }, [obteniendoConsultas])
+    useEffect(() => { if(obteniendoConsultas) {  messageLoading("Obteniendo consultas médicas...", "consultas") } }, [obteniendoConsultas])
     useEffect(() => { if(consultasObtenidas?.data.length > 0) {  messageSuccess("Consultas obtenidas!", "consultas") 
-             } else {  messageInfo("No se encontraron consultas Medicas!", "consultas") } }, 
+             } else {  messageInfo("No se encontraron consultas Médicas!", "consultas") } }, 
     [obteniendoConsultas])
-    useEffect(() => { if(errorAlObtenerConsultas) {  messageError(errorAlObtenerConsultas.message, "consultas") } }, [errorAlObtenerConsultas])
+    useEffect(() => { if(errorAlObtenerConsultas) {  messageError("Se a producido un error al obtener consultas médicas", "consultas") } }, [errorAlObtenerConsultas])
     
   return (
     <>
-
     {
       visibleModales.get(ESPECIALIDAD) &&
       <EspecialidadesModal
-        visible={ visibleModales.get(ESPECIALIDAD) }
+        visible={ visibleModales.get(ESPECIALIDAD) || false }
         close={ onMenuParametros }
       />
     } 
     {
       visibleModales.get(CATEGORIA) &&
        <CategoriasModal 
-        visible={ visibleModales.get(CATEGORIA) }
+        visible={ visibleModales.get(CATEGORIA) || false }
         close={ onMenuParametros }
        />
     }
     {
       visibleModales.get(SERVINV) &&
       <ServicioIndiviModal
-       visible={ visibleModales.get(SERVINV) }
+       visible={ visibleModales.get(SERVINV) || false}
        close={ onMenuParametros }
       />
     }
     {
       visibleModales.get(PAQUETE) &&
        <PaqueteMedicoModal 
-        visible={ visibleModales.get(PAQUETE) }
+        visible={ visibleModales.get(PAQUETE) || false }
         close={ onMenuParametros }
        />
     }
-     {
-       detalleModal && 
-        <DetalleConsultasMedicasModal
-          detalleModal={ detalleModal }
-          consultaModal={ consultaModal }
-          setDetalleModal={ setDetalleModal }
-          form={ form }
-        />
+     { detalleModal && 
+      <ConsultasMedicasModal
+        detalleModal={ detalleModal }
+        consultaModal={ consultaModal }
+        setDetalleModal={ setDetalleModal }
+        form={ form }
+        detalle
+      />
+     }
+     { visibleRegistrar && 
+      <ConsultasMedicasModal
+        detalleModal={ visibleRegistrar }
+        consultaModal={ consultaModal }
+        setDetalleModal={ setVisibleRegistrar }
+        form={ form }
+      />    
      }
      <FiltroConsultasMedicas
         pacientes={ pacientesObtenidos?.data }
@@ -119,6 +131,7 @@ const ConsultasMedicas = () => {
         form={ form }
      />
      <ConsultasMedicasTabla 
+        onRegister={ onRegister }
         onDetalleModal={ onDetalleModal }
         onMenuParametros={ onMenuParametros }
         loading={ obteniendoConsultas }

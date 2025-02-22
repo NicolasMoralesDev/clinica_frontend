@@ -15,9 +15,10 @@ interface ConsultasMedicasTablaProps {
   cerrarConsultas: (cerrado: any) => void
   onDetalleModal: (detalle: any) => void
   onMenuParametros: (menu: any) => void
+  onRegister: () => void
 }
 
-const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleModal, onMenuParametros }: ConsultasMedicasTablaProps) => {
+const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleModal, onMenuParametros, onRegister }: ConsultasMedicasTablaProps) => {
 
     const [consultasSeleccionadas, setConsultasSeleccionadas] = useState([])
 
@@ -65,16 +66,19 @@ const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleM
       sorter: (a: any, b: any ) => a.pagado - b.pagado, 
       render: (pagado: boolean) => pagado ? <Tag color="green">SI</Tag> : <Tag color="error">NO</Tag>,
     }
-  ];
+  ]
 
   return (
     <div className="bg-slate-200 p-7">
         <Space align="start" className="w-full flex justify-end">
+           <Tooltip title="Registrar consulta médica">
+              <Button className="btn-green-custom" icon={ <IssuesCloseOutlined /> } type="primary" onClick={ ()=> onRegister() }>Registrar consulta</Button>
+           </Tooltip>
            <MenuParametrosGenerales
              onMenuParametros={ onMenuParametros }
            />
-           <Tooltip title="Cerrar consultas medicas seleccionadas">
-              <Button className="btn-bordo-custom" disabled={ consultasSeleccionadas.length == 0 } icon={ <IssuesCloseOutlined /> } type="primary" onClick={ ()=> onCerrar() }>cerrar consultas</Button>
+           <Tooltip title="Cerrar consultas médicas seleccionadas">
+              <Button className="btn-bordo-custom" disabled={ consultasSeleccionadas.length == 0 } icon={ <IssuesCloseOutlined /> } type="primary" onClick={ ()=> onCerrar() }>Cerrar consultas</Button>
            </Tooltip>
         </Space>
      <Table
@@ -96,7 +100,7 @@ const ConsultasMedicasTabla = ({loading, dataSource, cerrarConsultas, onDetalleM
             onChange: onSelectConsultas,
         } }
         locale={ {
-            emptyText: "No se encontraron consultas medicas",
+            emptyText: "No se encontraron consultas médicas",
         } }
         loading={ loading }
         />

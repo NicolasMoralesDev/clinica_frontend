@@ -17,7 +17,7 @@ const ServicioIndiviModal = ({ visible, close }: ServicioIndiviProp) => {
 
     const [servicioIndivi, setServicioIndivi] = useState<ServicioIndividual>()
 
-    const { mutate: registrarServIndivi, isLoading: registrandoServIndivi, data: servIndiviRegistrado, error: errorAlRegistrarservIndivi } = useRegistrarServIndividual(servicioIndivi)
+    const { mutate: registrarServIndivi, isLoading: registrandoServIndivi, data: servIndiviRegistrado, error: _errorAlRegistrarservIndivi } = useRegistrarServIndividual(servicioIndivi)
     const { mutate: obtenerServIndivi, data: serviciosObtenidos  } = useObtenerServIndividual()
     const { mutate: obtenerCategoria, data: categoriaObtenida } = useObtenerCategorias()
           

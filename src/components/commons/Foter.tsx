@@ -1,3 +1,4 @@
+
 const Foter = () => {
   return (
     <footer className="bg-slate-200 p-5">

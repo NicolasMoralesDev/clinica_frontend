@@ -16,7 +16,7 @@ const ServicioMedicoModal = ({ visible, close }: ServicioMedicoProp) => {
   
     const [servicioMedico, setServicioMedico] = useState<ServicioMedico>()
 
-    const { mutate: registrarServMedico, isLoading: registrandoServMedico, data: servMedicoRegistrado, error: errorAlRegistrarservIndivi } = useRegistrarServMedico(servicioMedico)
+    const { mutate: registrarServMedico, isLoading: registrandoServMedico, data: servMedicoRegistrado, error: _errorAlRegistrarservIndivi } = useRegistrarServMedico(servicioMedico)
     const { mutate: obtenerServMedico, data: serviciosObtenidos  } = useObtenerServMedico()
           
     useEffect(() => { if(servMedicoRegistrado)  { messageSuccess(servMedicoRegistrado?.data?.msg, "servIndividual") } }, [servMedicoRegistrado])

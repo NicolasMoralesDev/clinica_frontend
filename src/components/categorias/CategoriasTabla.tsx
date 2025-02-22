@@ -22,6 +22,11 @@ const CategoriasTabla = ({ loading, dataSource }: CategoriasTablaProp) => {
       dataIndex: "nombre",
       key: "nombre",
     },
+    {
+      title: "Código",
+      dataIndex: "codigoCategoria",
+      key: "codigoCategoria",
+    },
   ]
 
   return (

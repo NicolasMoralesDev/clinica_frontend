@@ -21,7 +21,7 @@ const EspecialidadesModal = ({ visible, close }: EspecialidadesModalProp) => {
      
     useEffect(() => { if(especialidadRegistrada)  {  messageSuccess(especialidadRegistrada?.data?.msg, "especialidad") } }, [especialidadRegistrada])
     useEffect(() => { if(registrandoEspecialidad) { messageLoading("Registrando...", "especialidad") } }, [registrandoEspecialidad])
-    useEffect(() => { if(errorAlRegistrarEspecialidad) { messageError(errorAlRegistrarEspecialidad?.msg, "especialidad") } }, [errorAlRegistrarEspecialidad])
+    useEffect(() => { if(errorAlRegistrarEspecialidad) { messageError("Error al intentar registrar la especialidad!", "especialidad") } }, [errorAlRegistrarEspecialidad])
                         
     useEffect(() => { obtenerEspecialidades() }, [especialidadRegistrada])
      

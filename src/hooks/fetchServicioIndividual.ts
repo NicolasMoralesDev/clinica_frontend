@@ -1,7 +1,6 @@
 
 import axios from "axios"
 import { useMutation } from "react-query"
-import { ServicioIndividual } from "../classes/ServicioIndividual"
 
 const URL_BASE = "/servicio-individual"
 
@@ -14,7 +13,7 @@ export const useObtenerServIndividual = () => {
     })
 }
 
-export const useRegistrarServIndividual = (servIndividual: ServicioIndividual) => {
+export const useRegistrarServIndividual = (servIndividual: any) => {
     return useMutation({
       mutationKey: ['servicio-individual'],
       mutationFn: async () => {

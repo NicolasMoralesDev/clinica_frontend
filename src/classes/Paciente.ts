@@ -1,12 +1,8 @@
 import { Enfermedad } from "./Enfermedad"
+import { Persona } from "./Persona"
 
-export class Paciente {
-    id: Number
-    nombre: String
+export class Paciente extends Persona {
     obraSocial: boolean
-    dni: String
-    direccion: String
-    email: String
     enfermedades: Set<Enfermedad>
 
     getIsObraSocial() {
