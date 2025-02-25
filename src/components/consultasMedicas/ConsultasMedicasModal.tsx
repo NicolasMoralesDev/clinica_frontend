@@ -9,25 +9,41 @@ import { selectFilterOption } from "../../utils/StringUtils"
 import { useObtenerMedicos } from "../../hooks/fetchMedicos"
 import { FECHA_FORMATO_BARRAS } from "../../constants/fechasFormatos"
 import dayjs from "dayjs"
+import { useObtenerTurnosDisponibles } from "../../hooks/fetchDiasLaborales"
+import { DiaLaboralFiltro } from "../../classes/DiaLaboralFiltro"
+import { ServicioIndividual } from "../../classes/ServicioIndividual"
 
 interface ConsultasMedicasModalProps {
   detalleModal: boolean
   consultaModal?: ConsultaMedicas
   setDetalleModal: (estado: boolean) => void
+  servicios: ServicioIndividual[]
   form: any
   detalle?: boolean
 }
 
-const ConsultasMedicasModal = ({ detalleModal, consultaModal, setDetalleModal, form, detalle }: ConsultasMedicasModalProps) => {
+const ConsultasMedicasModal = ({ detalleModal, consultaModal, setDetalleModal, form, detalle, servicios }: ConsultasMedicasModalProps) => {
+
+  const [filtro, setFiltro] = useState<DiaLaboralFiltro>()
 
   const { mutate: obtenerPacientes, data: pacientesObtenidos, error: _errorAlObtenerPacientes } = useObtenerPacientes()
   const { mutate: obtenerMedicos, data: medicosObtenidos, error: _errorAlObtenerMedicos } = useObtenerMedicos()
+  const { mutate: obtenerTurno, data: turnosObtenidos, error: _errorAlObtenerTurnos } = useObtenerTurnosDisponibles(filtro)
+
 
   const [paciente, setPaciente] = useState<Paciente>()
 
   const onChange = (nombre: String) => {
     setPaciente(pacientesObtenidos?.data.find((paciente: Paciente) => paciente.nombre === nombre))
   }
+
+  const onChangeFecha = (data: any) => {
+    setFiltro({ fecha: dayjs(data).format('YYYY-MM-DD'), idMedico: form.getFieldValue("medicoNombre") } )
+    if (filtro != null) {
+      obtenerTurno()
+    }
+  }
+ console.log(turnosObtenidos?.data);
    
   useEffect(() => { obtenerPacientes(), obtenerMedicos() }, [])
   
@@ -42,6 +58,7 @@ const ConsultasMedicasModal = ({ detalleModal, consultaModal, setDetalleModal, f
         medicoNombre: detalle ? consultaModal?.medico?.nombre : '',
         servicio: detalle ? consultaModal?.servicio : '',
         fechaTurno: detalle ? dayjs(consultaModal?.fechaTurno) : '',
+        horaTurno: detalle ? consultaModal?.horaTurno : '',
         montoTotal: detalle ? consultaModal?.montoTotal : '',
         pagado: detalle ? consultaModal?.pagado : ''
     })
@@ -62,6 +79,7 @@ const ConsultasMedicasModal = ({ detalleModal, consultaModal, setDetalleModal, f
       },
       servicio: values?.servicio,
       fechaTurno: values?.fechaTurno,
+      horaTurno: values?.horaTurno,
       montoTotal: values?.montoTotal,
       pagado: values?.pagado
     };
@@ -150,6 +168,7 @@ const ConsultasMedicasModal = ({ detalleModal, consultaModal, setDetalleModal, f
         <Col span={ 12 } sm={ 24 }>
           <Form.Item label="Fecha" name="fechaTurno" required>
                   <DatePicker 
+                    onChange={ onChangeFecha }
                     allowClear 
                     maxDate={ dayjs(FECHA_FORMATO_BARRAS) }
                     format={ {
@@ -157,11 +176,32 @@ const ConsultasMedicasModal = ({ detalleModal, consultaModal, setDetalleModal, f
                     } }/>
           </Form.Item>
         </Col>
+        <Col span={ 12 } sm={ 24 }>
+          <Form.Item label="Hora" name="horaTurno" required>
+            <Select
+             allowClear
+             placeholder="seleccione una hora"
+             options={ turnosObtenidos?.data?.map((turno: any) => ( {
+                      key: turno,
+                      label: turno,
+                      value: turno,
+              } )) }
+            />
+          </Form.Item>
+        </Col>
       </Row>
       <Row gutter={ 16 }>
         <Col span={ 24 }>
           <Form.Item label="Servicio" name="servicio" required>
-            <Input disabled={ detalle } className="border-gray-300" />
+            <Select
+             allowClear
+             placeholder="seleccione una hora"
+             options={ servicios?.map((servicio: ServicioIndividual) => ( {
+                      key: servicio.idServicio,
+                      label: servicio.nombre,
+                      value: servicio.idServicio,
+              } )) }
+            />
           </Form.Item>
         </Col>
       </Row>

@@ -1,19 +1,21 @@
 import { useState } from "react"
 import { Button, Input, Form, Typography } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
+import { useLogin } from "../../hooks/fetchLogin";
 
 const { Title } = Typography
 
 const FormLogin = () => {
   const [loading, setLoading] = useState(false)
+  const [usuario, setUsuario] = useState([])
+
+  const { mutate: login, isLoading: logueando, data: resultado, error: errorAlLoguearse } = useLogin(usuario)
 
   const onFinish = (values: unknown) => {
-    setLoading(true)
-    // Simula una llamada a la API para el login
-    setTimeout(() => {
-      setLoading(false)
-      console.log("Usuario autenticado:", values)
-    }, 2000)
+    setUsuario(values)
+    if (usuario != null) {
+      login()
+    }
   }
 
   return (

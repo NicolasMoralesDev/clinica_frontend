@@ -15,6 +15,7 @@ import PaqueteMedicoModal from "../paquetes/PaqueteMedicoModal"
 import ServicioIndiviModal from "../servicioIndividual/ServicioIndiviModal"
 import ConsultasMedicasModal from "./ConsultasMedicasModal"
 import "./estilos/estilos.css"
+import { useObtenerServIndividual } from "../../hooks/fetchServicioIndividual"
 
 const ConsultasMedicas = () => {
 
@@ -43,6 +44,7 @@ const ConsultasMedicas = () => {
     const [consultaModal, setConsultaModal] = useState<ConsultaMedicas>()
 
     const { mutate: obtenerConsultas, isLoading: obteniendoConsultas, data: consultasObtenidas, error: errorAlObtenerConsultas } = useObtenerConsultas(consultasMedicasFiltro)
+    const { mutate: obtenerServicios, data: serviciosIndividuales } = useObtenerServIndividual()
     const { mutate: cerrarConsultas, isLoading: cerrandoConsultas, data: consultasCerradas, error: errorAlCerrarConsultas } = useCerrarConsultas(consultasSeleccionadas)
 
     const { mutate: obtenerPacientes, data: pacientesObtenidos } = useObtenerPacientes()
@@ -63,7 +65,9 @@ const ConsultasMedicas = () => {
 
     useEffect(() => { obtenerConsultas() }, [consultasCerradas, consultasMedicasFiltro])
     useEffect(() => { obtenerPacientes()
-                      obtenerMedicos() }, [])
+                      obtenerMedicos() 
+                      obtenerServicios()
+                    }, [])
 
     /* CONSULTAS MÉDICAS */
 
@@ -112,6 +116,7 @@ const ConsultasMedicas = () => {
         detalleModal={ detalleModal }
         consultaModal={ consultaModal }
         setDetalleModal={ setDetalleModal }
+        servicios={ serviciosIndividuales?.data }
         form={ form }
         detalle
       />
@@ -120,11 +125,13 @@ const ConsultasMedicas = () => {
       <ConsultasMedicasModal
         detalleModal={ visibleRegistrar }
         consultaModal={ consultaModal }
+        servicios={ serviciosIndividuales?.data }
         setDetalleModal={ setVisibleRegistrar }
         form={ form }
       />    
      }
      <FiltroConsultasMedicas
+        servicios={ serviciosIndividuales?.data }
         pacientes={ pacientesObtenidos?.data }
         medicos={ medicosObtenidos?.data }
         filtrarConsultas={ filtrarConsultas }

@@ -4,15 +4,17 @@ import { FECHA_FORMATO_BARRAS } from "../../constants/fechasFormatos"
 import { Paciente } from "../../classes/Paciente"
 import { Medico } from "../../classes/Medico"
 import { ConsultaMedicaFiltro } from "../../classes/ConsultaMedicaFiltro"
+import { ServicioIndividual } from "../../classes/ServicioIndividual"
 
 interface FiltroConsultasMedicasProps {
   pacientes: Paciente[]
   medicos: Medico[]
   filtrarConsultas: (filtro: ConsultaMedicaFiltro) => void
   form: any
+  servicios: ServicioIndividual[]
 }
 
-const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: FiltroConsultasMedicasProps) => {
+const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form, servicios }: FiltroConsultasMedicasProps) => {
 
   const handleFinish = (data: ConsultaMedicaFiltro) => {  filtrarConsultas(data) }
 
@@ -81,15 +83,15 @@ const FiltroConsultasMedicas = ({ pacientes, medicos, filtrarConsultas, form }: 
               </Col>
               <Col span={ 5 }>
                 <Form.Item label="Servicio" name="servicio">
-            {/*       <Select
+                   <Select
                     allowClear
                     placeholder="seleccione"
-                    options={ categorias?.map((categoria: Categoria) => ( {
-                      key: categoria.titulo,
-                      label: categoria.titulo.toUpperCase(),
-                      value: categoria.titulo,
+                    options={ servicios?.map((servi: ServicioIndividual) => ( {
+                      key: servi.nombre,
+                      label: servi.nombre.toUpperCase(),
+                      value: servi.nombre,
                     })) }
-                  /> */}
+                  /> 
                 </Form.Item>
               </Col>
             </Row>

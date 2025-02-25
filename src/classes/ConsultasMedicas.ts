@@ -7,6 +7,7 @@ export class ConsultaMedicas {
     paciente: Paciente
     servicio: Number
     fechaTurno: Date
+    horaTurno: Date
     montoTotal: Number
     pagado: Boolean
     borrado: Boolean
