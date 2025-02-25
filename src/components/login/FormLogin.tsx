@@ -1,17 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button, Input, Form, Typography } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
 import { useLogin } from "../../hooks/fetchLogin";
+import { messageError, messageLoading } from "../../utils/Message";
 
 const { Title } = Typography
 
 const FormLogin = () => {
-  const [loading, setLoading] = useState(false)
   const [usuario, setUsuario] = useState([])
 
   const { mutate: login, isLoading: logueando, data: resultado, error: errorAlLoguearse } = useLogin(usuario)
 
-  const onFinish = (values: unknown) => {
+  useEffect(() => { if(logueando) {  messageLoading("Ingresandos...", "login") } }, [logueando])
+  useEffect(() => { if(errorAlLoguearse) {  messageError("Contraseña o usuario invalidos..", "login") } }, [errorAlLoguearse])
+  
+  const onFinish = (values: any) => {
     setUsuario(values)
     if (usuario != null) {
       login()
@@ -57,7 +60,6 @@ const FormLogin = () => {
             htmlType="submit"
             block
             size="large"
-            loading={ loading }
             className="rounded-lg bg-blue-500 hover:bg-blue-600 text-white"
           >
             Iniciar sesión
