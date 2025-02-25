@@ -1,10 +1,13 @@
-import React from 'react'
-import FormLogin from './FormLogin'
+import FondoLogin from "./FondoLogin"
+import FormLogin from "./FormLogin"
 
 const Login = () => {
   return (
-    <FormLogin/>
-  )
-}
+    <div className="h-full w-full flex justify-center items-center">
+      <FormLogin />
+      <FondoLogin />
+    </div>
+  );
+};
 
-export default Login
+export default Login;

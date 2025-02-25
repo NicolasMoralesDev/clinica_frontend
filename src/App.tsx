@@ -1,14 +1,51 @@
-import './App.css'
+import { ReactNode } from "react"
+import Layout, { Content, Header } from "antd/es/layout/layout"
+import { theme } from "antd"
+import NavBar from "./components/commons/NavBar"
+import "./App.css"
+import Foter from "./components/commons/Foter"
 
-function App() {
+interface AppProp {
+  children?: ReactNode;
+}
+
+function App(prop: AppProp) {
+
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
 
   return (
     <>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Layout
+        style={{
+          minHeight: "100vh",
+        }}
+      >
+        <Layout>
+          <Header
+            style={{
+              margin: "1%",
+              padding: 0,
+              background: colorBgContainer,
+              textAlign: "center",
+              height: "10%",
+            }}
+          >
+            <NavBar/> 
+          </Header>
+          <Content
+            style={{
+              margin: "1%",
+            }}
+          >
+            {prop.children}
+          </Content>
+            <Foter/>
+        </Layout>
+      </Layout>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

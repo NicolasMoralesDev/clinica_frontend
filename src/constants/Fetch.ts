@@ -1,0 +1,1 @@
+export const FETCH_URL = "http://149.50.148.20:443" 

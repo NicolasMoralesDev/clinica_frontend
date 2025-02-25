@@ -1,23 +1,33 @@
-import React, { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button, Input, Form, Typography } from "antd"
 import { UserOutlined, LockOutlined } from "@ant-design/icons"
+import { useLogin } from "../../hooks/fetchLogin";
+import { messageError, messageLoading } from "../../utils/Message";
 
-const { Title } = Typography;
+const { Title } = Typography
 
 const FormLogin = () => {
-  const [loading, setLoading] = useState(false);
+  const [usuario, setUsuario] = useState([])
 
-  const onFinish = (values: unknown) => {
-    setLoading(true);
-    // Simula una llamada a la API para el login
-    setTimeout(() => {
-      setLoading(false);
-      console.log("Usuario autenticado:", values);
-    }, 2000);
-  };
+  const { mutate: login, isLoading: logueando, data: resultado, error: errorAlLoguearse } = useLogin(usuario)
+
+  useEffect(() => { if(logueando) {  messageLoading("Ingresandos...", "login") } }, [logueando])
+  useEffect(() => { if(errorAlLoguearse) {  messageError("Contraseña o usuario invalidos..", "login") } }, [errorAlLoguearse])
+  
+  const onFinish = (values: any) => {
+    setUsuario(values)
+    if (usuario != null) {
+      login()
+    }
+  }
 
   return (
-    <div className="flex justify-center items-center max-h-screen bg-gray-50">
+    <div className="flex justify-center h-full w-1/2 items-center flex-col bg-gray-50">
+      <div>
+        <Title level={ 1 } className="text-center text-gray-800 mb-6">
+          Clinica Medica
+        </Title>
+      </div>
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
         <Title level={ 3 } className="text-center text-gray-800 mb-6">
           Iniciar sesión
@@ -28,7 +38,7 @@ const FormLogin = () => {
             rules={ [{ required: true, message: "Por favor, ingresa tu nombre de usuario" }] }
           >
             <Input
-              prefix={ <UserOutlined />}
+              prefix={ <UserOutlined /> }
               placeholder="Nombre de usuario"
               size="large"
               className="rounded-lg"
@@ -50,7 +60,6 @@ const FormLogin = () => {
             htmlType="submit"
             block
             size="large"
-            loading={ loading }
             className="rounded-lg bg-blue-500 hover:bg-blue-600 text-white"
           >
             Iniciar sesión
